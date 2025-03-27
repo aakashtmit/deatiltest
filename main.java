@@ -12,19 +12,16 @@ public class main {
         String outputFilePath = "output.txt";
 
         try {
-            // Read JSON file
+            
             String content = new String(Files.readAllBytes(Paths.get(jsonFilePath)));
             JSONObject jsonObject = new JSONObject(content);
 
-            // Extract first_name and roll_number
             String firstName = jsonObject.getJSONObject("student").getString("first_name").toLowerCase();
             String rollNumber = jsonObject.getJSONObject("student").getString("roll_number").toLowerCase();
 
-            // Concatenate and generate MD5 hash
             String concatenatedString = firstName + rollNumber;
             String md5Hash = generateMD5Hash(concatenatedString);
 
-            // Write the hash to output.txt
             try (FileWriter writer = new FileWriter(outputFilePath)) {
                 writer.write(md5Hash);
             }
